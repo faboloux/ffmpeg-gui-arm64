@@ -1,0 +1,208 @@
+{
+  "video_codecs": {
+    "AV1": {
+      "name": "AV1",
+      "encoder": "libaom-av1",
+      "extension": "mp4",
+      "default_params": {
+        "crf": 30,
+        "cpu_used": 4,
+        "tile_columns": 2,
+        "tile_rows": 2,
+        "threads": 2
+      },
+      "params": [
+        {
+          "name": "CRF",
+          "type": "slider",
+          "min": 0,
+          "max": 63,
+          "default": 30,
+          "description": "恒定速率因子（0-63，值越低质量越好）"
+        },
+        {
+          "name": "CPU Used",
+          "type": "slider",
+          "min": 0,
+          "max": 8,
+          "default": 4,
+          "description": "CPU使用级别（拾光坞建议4-6）"
+        },
+        {
+          "name": "Tile Columns",
+          "type": "slider",
+          "min": 0,
+          "max": 6,
+          "default": 2,
+          "description": "瓦片列数（提升并行速度）"
+        },
+        {
+          "name": "Tile Rows",
+          "type": "slider",
+          "min": 0,
+          "max": 6,
+          "default": 2,
+          "description": "瓦片行数（提升并行速度）"
+        },
+        {
+          "name": "Threads",
+          "type": "slider",
+          "min": 1,
+          "max": 4,
+          "default": 2,
+          "description": "线程数（拾光坞建议≤4）"
+        }
+      ]
+    },
+    "H.265/HEVC": {
+      "name": "H.265/HEVC",
+      "encoder": "libx265",
+      "extension": "mp4",
+      "default_params": {
+        "crf": 28,
+        "preset": "medium",
+        "tune": "film",
+        "profile": "main"
+      },
+      "params": [
+        {
+          "name": "CRF",
+          "type": "slider",
+          "min": 0,
+          "max": 51,
+          "default": 28,
+          "description": "恒定速率因子（0-51，值越低质量越好）"
+        },
+        {
+          "name": "Preset",
+          "type": "combobox",
+          "options": ["ultrafast", "superfast", "veryfast", "faster", "fast", "medium", "slow"],
+          "default": "medium",
+          "description": "编码速度（拾光坞建议fast/medium）"
+        },
+        {
+          "name": "Tune",
+          "type": "combobox",
+          "options": ["film", "animation", "grain", "stillimage"],
+          "default": "film",
+          "description": "调优选项"
+        },
+        {
+          "name": "Profile",
+          "type": "combobox",
+          "options": ["main", "main10"],
+          "default": "main",
+          "description": "H.265配置文件"
+        }
+      ]
+    },
+    "H.264/AVC": {
+      "name": "H.264/AVC",
+      "encoder": "libx264",
+      "extension": "mp4",
+      "default_params": {
+        "crf": 23,
+        "preset": "medium",
+        "tune": "film",
+        "profile": "high"
+      },
+      "params": [
+        {
+          "name": "CRF",
+          "type": "slider",
+          "min": 0,
+          "max": 51,
+          "default": 23,
+          "description": "恒定速率因子（0-51）"
+        },
+        {
+          "name": "Preset",
+          "type": "combobox",
+          "options": ["ultrafast", "superfast", "veryfast", "faster", "fast", "medium"],
+          "default": "medium",
+          "description": "编码速度预设"
+        }
+      ]
+    },
+    "VP9": {
+      "name": "VP9",
+      "encoder": "libvpx-vp9",
+      "extension": "webm",
+      "default_params": {
+        "crf": 30,
+        "deadline": "good",
+        "tile-columns": 2,
+        "threads": 2
+      },
+      "params": [
+        {
+          "name": "CRF",
+          "type": "slider",
+          "min": 0,
+          "max": 63,
+          "default": 30,
+          "description": "恒定速率因子"
+        },
+        {
+          "name": "Deadline",
+          "type": "combobox",
+          "options": ["best", "good", "realtime"],
+          "default": "good",
+          "description": "速度/质量平衡"
+        }
+      ]
+    }
+  },
+  "audio_codecs": {
+    "AAC": {
+      "name": "AAC",
+      "encoder": "aac",
+      "default_params": {
+        "b:a": "128k"
+      },
+      "params": [
+        {
+          "name": "Bitrate",
+          "type": "combobox",
+          "options": ["96k", "128k", "192k"],
+          "default": "128k",
+          "description": "音频比特率"
+        }
+      ]
+    },
+    "MP3": {
+      "name": "MP3",
+      "encoder": "libmp3lame",
+      "default_params": {
+        "b:a": "128k"
+      },
+      "params": [
+        {
+          "name": "Bitrate",
+          "type": "combobox",
+          "options": ["96k", "128k", "192k"],
+          "default": "128k",
+          "description": "音频比特率"
+        }
+      ]
+    }
+  },
+  "resolutions": ["原始", "1920x1080", "1280x720", "854x480", "自定义"],
+  "default_settings": {
+    "video_codec": "AV1",
+    "audio_codec": "AAC",
+    "resolution": "原始",
+    "output_dir": "/config/ffmpeg-gui/output",
+    "preserve_metadata": true,
+    "overwrite_existing": false,
+    "enable_hw_accel": false
+  },
+  "ffmpeg_path": "ffmpeg",
+  "ffprobe_path": "ffprobe",
+  "max_concurrent_tasks": 1,
+  "logging": {
+    "enabled": true,
+    "level": "info",
+    "path": "/config/ffmpeg-gui/logs"
+  }
+}
